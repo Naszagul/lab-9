@@ -8,6 +8,7 @@
     <body>
         <h1>Lab 9 Email</h1>
         <h2>Login</h2>
+        <p>${message}</p>
         <form action="login" method="post">
             email: <input type="text" name="email"><br>
             password: <input type="password" name="password"><br>
