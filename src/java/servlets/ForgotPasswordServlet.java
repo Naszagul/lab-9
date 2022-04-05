@@ -46,9 +46,10 @@ public class ForgotPasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
+        String path = getServletContext().getRealPath("/WEB-INF");
 
-        AccountService.forgotPassword(email);
-
+        AccountService.forgotPassword(email, path);
+        
         String message = "Email sent to " + email;
         HttpSession session = request.getSession();
         session.setAttribute("message", message);

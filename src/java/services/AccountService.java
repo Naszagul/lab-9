@@ -1,21 +1,30 @@
 package services;
 
 import dataaccess.UserDB;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.User;
 
 public class AccountService {
 
-    public static boolean forgotPassword(String email) {
+    public static boolean forgotPassword(String email, String path) {
 
         UserDB userDB = new UserDB();
 
         try {
+            //User user = userDB.get(email);
+            String to = email; //user.getEmail();
+            String subject = "Notes App Login";
+            String template = path + "/emailtemplates/email.html";
 
-            User user = userDB.get(email);
-            String subject="Password Recovery";
-            String body=String.format("Hi %s %s,%nHere are your credentials:%nEmail Address: %s%nPassword: %s", user.getFirstName(), user.getLastName(), user.getEmail(),user.getPassword());
-            GmailService.sendMail(user.getEmail(), subject, body, true);
+            HashMap<String, String> tags = new HashMap<>();
+            tags.put("firstname", "matt");//user.getFirstName());
+            tags.put("lastname", "lipsy");//user.getLastName());
+            tags.put("date", (new java.util.Date()).toString());
 
+            GmailService.sendMail(to, subject, template, tags);
+           
         } catch (Exception e) {
             return false;
             }
