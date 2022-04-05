@@ -10,10 +10,12 @@ public class AccountService {
         UserDB userDB = new UserDB();
 
         try {
+
             User user = userDB.get(email);
             String subject="Password Recovery";
-            String body="your password is: "+ user.getPassword();
+            String body=String.format("Hi %s %s,%nHere are your credentials:%nEmail Address: %s%nPassword: %s", user.getFirstName(), user.getLastName(), user.getEmail(),user.getPassword());
             GmailService.sendMail(user.getEmail(), subject, body, true);
+
         } catch (Exception e) {
             return false;
             }

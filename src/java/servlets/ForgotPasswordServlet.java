@@ -46,7 +46,6 @@ public class ForgotPasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
-        String path;
 
         AccountService.forgotPassword(email);
 
@@ -55,8 +54,5 @@ public class ForgotPasswordServlet extends HttpServlet {
         session.setAttribute("message", message);
 
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-
-
     }
-
 }
