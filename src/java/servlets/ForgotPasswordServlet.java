@@ -48,9 +48,9 @@ public class ForgotPasswordServlet extends HttpServlet {
         String email = request.getParameter("email");
         String path;
 
-        //AccountService.forgotPassword(email);
+        AccountService.forgotPassword(email);
 
-        String message = "something cool";
+        String message = "Email sent to " + email;
         HttpSession session = request.getSession();
         session.setAttribute("message", message);
 

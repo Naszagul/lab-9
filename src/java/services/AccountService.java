@@ -10,16 +10,14 @@ public class AccountService {
         UserDB userDB = new UserDB();
 
         try {
-            //User user = userDB.get(email);
-            String subject="test";
-            String body="something";
-            GmailService.sendMail(email, subject, body, true);
-            return true;
-
+            User user = userDB.get(email);
+            String subject="Password Recovery";
+            String body="your password is: "+ user.getPassword();
+            GmailService.sendMail(user.getEmail(), subject, body, true);
         } catch (Exception e) {
-
+            return false;
             }
-        return false;
+        return true;
     }
     
     public User login(String email, String password) {
